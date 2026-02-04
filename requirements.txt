@@ -1,1 +1,3 @@
 telethon==1.34.0
+flask
+gunicorn  # Render любит gunicorn для web
