@@ -1,17 +1,13 @@
 services:
-  - type: worker
+  - type: web
     name: telegram-monitor
     env: python
-    region: oregon
-    plan: starter   # или free, если хочешь бесплатно (но с возможным засыпанием)
+    region: oregon  # или ближайший
+    plan: free      # именно free
     buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
+    startCommand: gunicorn main:app -b 0.0.0.0:$PORT
     envVars:
-      API_ID: 
+      API_ID:
         fromSecret: API_ID
       API_HASH:
         fromSecret: API_HASH
-    disks:
-      - name: data
-        mountPath: /opt/render/data
-        sizeGB: 1
