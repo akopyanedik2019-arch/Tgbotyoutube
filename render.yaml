@@ -1,0 +1,17 @@
+services:
+  - type: worker
+    name: telegram-monitor
+    env: python
+    region: oregon
+    plan: starter   # или free, если хочешь бесплатно (но с возможным засыпанием)
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      API_ID: 
+        fromSecret: API_ID
+      API_HASH:
+        fromSecret: API_HASH
+    disks:
+      - name: data
+        mountPath: /opt/render/data
+        sizeGB: 1
